@@ -116,7 +116,11 @@ def generate_slavonic_numbers(max_val=176):
         if base_str:
             slavonic_num = base_str[0] + titlo + base_str[1:]
             numeral_list.append(unicodedata.normalize('NFC', slavonic_num))
-            
+
+    #Add spaces
+    for i in range(len(numeral_list)):
+        numeral_list[i] = " " + numeral_list[i] + " "
+
     return numeral_list
 
 # Generate the list
@@ -186,7 +190,8 @@ if os.path.exists('Books'):
                             continue
 
                         verse_parts.append(chapter_text[:pos])
-                        chapter_text = chapter_text[pos + len(marker):]
+                        #Minus 1 because the verse marker includes space either side and want to keep that
+                        chapter_text = chapter_text[pos + len(marker) - 1:]
 
                     verse_parts.append(chapter_text)
 
